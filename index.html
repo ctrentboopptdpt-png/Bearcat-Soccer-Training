@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A public, no-login high school soccer player portal with preseason training, team calendar, benchmarks, local-only journal, and strategy lessons."
+    />
+    <meta name="theme-color" content="#12312a" />
+    <title>High School Soccer Player Portal</title>
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="preload" href="assets/hero-soccer-culture-kit.png" as="image" />
+    <link rel="stylesheet" href="offseason-training.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to program</a>
+
+    <header class="app-topbar" aria-label="Training app navigation">
+      <a class="brand" href="index.html" aria-label="Return to Culture Builder Kit home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Soccer Player Portal</span>
+      </a>
+
+      <nav class="top-links" aria-label="App sections">
+        <a href="#calendar-panel">Training</a>
+        <a href="#team-panel">Team</a>
+        <a href="#benchmarks-panel">Benchmarks</a>
+        <a href="#journal-panel">Journal</a>
+        <a href="#strategy-panel">Strategy</a>
+      </nav>
+    </header>
+
+    <main class="app-layout" id="main">
+      <section class="program-hero" aria-labelledby="program-title">
+        <img
+          class="program-hero-image"
+          src="assets/hero-soccer-culture-kit.png"
+          alt="Soccer training field with coaching tools at golden hour"
+        />
+        <div class="program-hero-overlay" aria-hidden="true"></div>
+        <div class="program-hero-copy">
+          <p class="kicker">Player app</p>
+          <h1 id="program-title">High School Soccer Player Portal</h1>
+          <p>
+            Off-season training, team calendar, benchmarks, personal journal,
+            and strategy teaching in one phone-ready hub.
+          </p>
+        </div>
+      </section>
+
+      <section class="status-strip" aria-label="Program status">
+        <div class="status-item">
+          <span id="complete-count">0</span>
+          <small>sessions done</small>
+        </div>
+        <div class="status-item">
+          <span id="event-count">0</span>
+          <small>team events</small>
+        </div>
+        <div class="status-item">
+          <span id="journal-count">0</span>
+          <small>journal entries</small>
+        </div>
+        <div class="status-item">
+          <span>36</span>
+          <small>training sessions</small>
+        </div>
+        <button class="reset-button" id="reset-progress" type="button">Reset</button>
+      </section>
+
+      <section class="privacy-strip" aria-label="Privacy notice">
+        <div>
+          <strong>No login. No tracking. No server data collection.</strong>
+          <span>Progress, journal entries, benchmark results, and personal schedule edits stay in this browser on this device.</span>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="Program controls">
+        <div class="view-tabs" role="tablist" aria-label="Training views">
+          <button class="view-tab is-active" type="button" data-view="training" role="tab" aria-selected="true">
+            Training
+          </button>
+          <button class="view-tab" type="button" data-view="weeks" role="tab" aria-selected="false">
+            Weeks
+          </button>
+          <button class="view-tab" type="button" data-view="team" role="tab" aria-selected="false">
+            Team
+          </button>
+          <button class="view-tab" type="button" data-view="benchmarks" role="tab" aria-selected="false">
+            Benchmarks
+          </button>
+          <button class="view-tab" type="button" data-view="journal" role="tab" aria-selected="false">
+            Journal
+          </button>
+          <button class="view-tab" type="button" data-view="strategy" role="tab" aria-selected="false">
+            Strategy
+          </button>
+          <button class="view-tab" type="button" data-view="fuel" role="tab" aria-selected="false">
+            Fuel
+          </button>
+        </div>
+
+        <div class="month-toggle" aria-label="Calendar month">
+          <button class="month-button is-active" type="button" data-month="5">June</button>
+          <button class="month-button" type="button" data-month="6">July</button>
+        </div>
+      </section>
+
+      <section class="view-panel" id="calendar-panel" data-panel="calendar" aria-label="Training calendar">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Calendar</p>
+            <h2 id="calendar-title">June 2026</h2>
+          </div>
+          <p class="equipment-note">Ball only. No cones, ladders, goals, bands, or weights required.</p>
+        </div>
+
+        <div class="calendar-legend" aria-label="Calendar legend">
+          <span><i class="legend-dot home-dot"></i>Home</span>
+          <span><i class="legend-dot team-dot"></i>In-person</span>
+          <span><i class="legend-dot recovery-dot"></i>Recovery</span>
+        </div>
+
+        <div class="weekday-row" aria-hidden="true">
+          <span>Sun</span>
+          <span>Mon</span>
+          <span>Tue</span>
+          <span>Wed</span>
+          <span>Thu</span>
+          <span>Fri</span>
+          <span>Sat</span>
+        </div>
+        <div class="calendar-grid" id="calendar-grid"></div>
+      </section>
+
+      <section class="view-panel" id="session-panel" data-panel="session" aria-live="polite">
+        <div class="session-empty" id="session-empty">
+          <p class="kicker">Selected day</p>
+          <h2>Choose a calendar day.</h2>
+        </div>
+        <article class="session-detail" id="session-detail"></article>
+      </section>
+
+      <section class="view-panel is-hidden" id="weeks-panel" data-panel="weeks" aria-label="Weekly progression">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Progression</p>
+            <h2>Week-by-week focus</h2>
+          </div>
+          <p class="equipment-note">Progression moves from foundation to speed, match intensity, peak, and taper.</p>
+        </div>
+        <div class="week-list" id="week-list"></div>
+      </section>
+
+      <section class="view-panel is-hidden" id="team-panel" data-panel="team" aria-label="Team calendar">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Team calendar</p>
+            <h2>Games and practices</h2>
+          </div>
+          <p class="equipment-note">Schedule edits save on this device only. Edit the default events in the app file before sharing a team-wide version.</p>
+        </div>
+
+        <form class="event-form app-form" id="event-form">
+          <label>
+            <span>Type</span>
+            <select name="type" required>
+              <option value="practice">Practice</option>
+              <option value="game">Game</option>
+              <option value="scrimmage">Scrimmage</option>
+              <option value="meeting">Meeting</option>
+            </select>
+          </label>
+          <label>
+            <span>Date</span>
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            <span>Time</span>
+            <input name="time" type="time" />
+          </label>
+          <label>
+            <span>Title</span>
+            <input name="title" type="text" placeholder="Varsity practice" required />
+          </label>
+          <label>
+            <span>Location</span>
+            <input name="location" type="text" placeholder="Stadium field" />
+          </label>
+          <label class="wide-field">
+            <span>Notes</span>
+            <input name="notes" type="text" placeholder="Bring white shirt, cleats, water" />
+          </label>
+          <button class="form-button" type="submit">Add Event</button>
+        </form>
+
+        <div class="event-tools">
+          <button class="utility-button" type="button" id="load-sample-events">Load Sample Schedule</button>
+          <button class="utility-button" type="button" id="clear-events">Clear Events</button>
+        </div>
+        <div class="event-list" id="event-list"></div>
+      </section>
+
+      <section class="view-panel is-hidden" id="benchmarks-panel" data-panel="benchmarks" aria-label="Benchmark reference and tracker">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Benchmarks</p>
+            <h2>Reference and tracker</h2>
+          </div>
+          <p class="equipment-note">Targets are coach-friendly reference ranges, not medical or recruiting standards.</p>
+        </div>
+
+        <div class="benchmark-grid" id="benchmark-grid"></div>
+
+        <form class="benchmark-form app-form" id="benchmark-form">
+          <label>
+            <span>Benchmark</span>
+            <select name="benchmark" id="benchmark-select" required></select>
+          </label>
+          <label>
+            <span>Date</span>
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            <span>Result</span>
+            <input name="result" type="text" placeholder="7:05, 42 reps, 1:30" required />
+          </label>
+          <label class="wide-field">
+            <span>Notes</span>
+            <input name="notes" type="text" placeholder="Felt strong, need better start" />
+          </label>
+          <button class="form-button" type="submit">Save Result</button>
+        </form>
+
+        <div class="result-list" id="benchmark-results"></div>
+      </section>
+
+      <section class="view-panel is-hidden" id="journal-panel" data-panel="journal" aria-label="Personal journal">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Journal</p>
+            <h2>Player reflection</h2>
+          </div>
+          <p class="equipment-note">Private notes save on this device only. Do not enter medical, emergency, or highly sensitive personal information.</p>
+        </div>
+
+        <form class="journal-form app-form" id="journal-form">
+          <label>
+            <span>Date</span>
+            <input name="date" type="date" required />
+          </label>
+          <label>
+            <span>Energy</span>
+            <select name="energy">
+              <option value="High">High</option>
+              <option value="Good">Good</option>
+              <option value="Okay">Okay</option>
+              <option value="Low">Low</option>
+            </select>
+          </label>
+          <label>
+            <span>Soreness</span>
+            <select name="soreness">
+              <option value="None">None</option>
+              <option value="Light">Light</option>
+              <option value="Moderate">Moderate</option>
+              <option value="High">High</option>
+            </select>
+          </label>
+          <label class="wide-field">
+            <span>Training note</span>
+            <textarea name="training" rows="3" placeholder="What did you do well today? What needs work?"></textarea>
+          </label>
+          <label class="wide-field">
+            <span>Mindset note</span>
+            <textarea name="mindset" rows="3" placeholder="How did you respond to mistakes, fatigue, or pressure?"></textarea>
+          </label>
+          <button class="form-button" type="submit">Save Entry</button>
+        </form>
+
+        <div class="journal-list" id="journal-list"></div>
+      </section>
+
+      <section class="view-panel is-hidden" id="strategy-panel" data-panel="strategy" aria-label="Soccer strategy teaching">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Strategy</p>
+            <h2>Soccer IQ lessons</h2>
+          </div>
+          <p class="equipment-note">Principles for players to review before training, film, and match days.</p>
+        </div>
+
+        <div class="strategy-filter" id="strategy-filter" aria-label="Strategy categories"></div>
+        <div class="strategy-layout">
+          <div class="strategy-list" id="strategy-list"></div>
+          <article class="strategy-detail" id="strategy-detail"></article>
+        </div>
+      </section>
+
+      <section class="view-panel is-hidden" id="fuel-panel" data-panel="fuel" aria-label="Fuel and recovery guidance">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Fuel</p>
+            <h2>Daily player habits</h2>
+          </div>
+          <p class="equipment-note">General guidance for teen athletes. Families should adjust for allergies, medical needs, and school policy.</p>
+        </div>
+
+        <div class="fuel-grid">
+          <article class="fuel-card">
+            <h3>Before training</h3>
+            <p>Eat a normal meal 3-4 hours before hard sessions when possible: carbohydrates, lean protein, color from fruit or vegetables, and water.</p>
+          </article>
+          <article class="fuel-card">
+            <h3>Quick snack</h3>
+            <p>If training starts soon, keep it simple: banana, toast, yogurt, trail mix, oatmeal, or a peanut-butter sandwich if tolerated.</p>
+          </article>
+          <article class="fuel-card">
+            <h3>During training</h3>
+            <p>Bring water. On hot days, shorten work bouts, add shade breaks, and stop immediately for dizziness, nausea, confusion, or chills.</p>
+          </article>
+          <article class="fuel-card">
+            <h3>After training</h3>
+            <p>Within 60-90 minutes, get carbohydrates plus protein: chocolate milk, eggs and toast, rice bowl, turkey sandwich, smoothie, or leftovers.</p>
+          </article>
+          <article class="fuel-card">
+            <h3>Daily plate</h3>
+            <p>Build most meals around carbs for energy, protein for repair, fruits and vegetables for micronutrients, and enough total food to support growth.</p>
+          </article>
+          <article class="fuel-card">
+            <h3>Drinks</h3>
+            <p>Water is the default. Avoid energy drinks. Sports drinks are usually only useful for long, intense, sweaty, or very hot sessions.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="view-panel safety-panel" id="safety-panel" aria-label="Safety reminders">
+        <div class="panel-heading">
+          <div>
+            <p class="kicker">Safety</p>
+            <h2>Train hard, stay available.</h2>
+          </div>
+        </div>
+        <div class="safety-grid">
+          <article>
+            <h3>Heat rule</h3>
+            <p>Move hard workouts to early morning or evening when heat and humidity climb. Add breaks and reduce intensity if the day feels heavy.</p>
+          </article>
+          <article>
+            <h3>Pain rule</h3>
+            <p>Soreness can happen. Sharp pain, limping, chest pain, trouble breathing, or symptoms that worsen are stop signs.</p>
+          </article>
+          <article>
+            <h3>Recovery rule</h3>
+            <p>Sleep, eat, hydrate, and keep rest days real. Progress comes from work plus recovery, not from stacking hard days blindly.</p>
+          </article>
+        </div>
+        <div class="source-links" aria-label="Reference links">
+          <a href="https://www.cdc.gov/physical-activity-basics/guidelines/children.html">CDC youth activity guidance</a>
+          <a href="https://www.healthychildren.org/English/healthy-living/nutrition/Pages/Sports-Nutrition-for-Busy-Families-and-Busy-Lifestyles.aspx">AAP sports nutrition</a>
+          <a href="https://www.healthychildren.org/English/health-issues/injuries-emergencies/sports-injuries/Pages/Exercise-Related-Heat-Illness.aspx">AAP heat safety</a>
+        </div>
+      </section>
+    </main>
+
+    <script src="offseason-training.js"></script>
+  </body>
+</html>

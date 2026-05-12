@@ -1,0 +1,17 @@
+{
+  "name": "High School Soccer Player Portal",
+  "short_name": "Soccer Portal",
+  "description": "A high school soccer player app with off-season training, team calendar, benchmarks, journal, and strategy lessons.",
+  "start_url": "offseason-training.html",
+  "display": "standalone",
+  "background_color": "#f8f5ec",
+  "theme_color": "#12312a",
+  "icons": [
+    {
+      "src": "assets/training-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

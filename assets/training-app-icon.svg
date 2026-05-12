@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Off-season soccer training app icon">
+  <rect width="512" height="512" rx="96" fill="#0c3424"/>
+  <path d="M94 372c84-50 238-50 324 0" fill="none" stroke="#f5d892" stroke-width="22" stroke-linecap="round"/>
+  <circle cx="256" cy="228" r="92" fill="#ffffff"/>
+  <path d="M256 145l48 35-18 56h-60l-18-56 48-35z" fill="#14395f"/>
+  <path d="M170 214l38-34M342 214l-38-34M202 303l24-67M310 303l-24-67M256 320v-84" fill="none" stroke="#14395f" stroke-width="18" stroke-linecap="round"/>
+  <path d="M114 110h284" fill="none" stroke="#d19a2e" stroke-width="22" stroke-linecap="round"/>
+</svg>
